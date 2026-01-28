@@ -95,7 +95,7 @@ public class GrindstoneHoverManager extends AbstractUIHoverManager {
 
     @Override
     public Optional<Integer> setPointsToCustomColor() {
-        return changePointColor ? Optional.of(0x007700) : Optional.empty();
+        return changePointColor ? Optional.of(0xFF007700) : Optional.empty();
     }
 
     @Override

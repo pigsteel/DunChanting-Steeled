@@ -67,11 +67,12 @@ public class AttributionManager {
     }
 
     public static void load(CompoundTag root) {
-        ListTag entries = root.getList("attributions").orElseThrow() ;
-        for(Tag entry : entries) {
+        Optional<ListTag> entries = root.getList("attributions");
+        if(entries.isEmpty()) return;
+        for(Tag entry : entries.get()) {
             CompoundTag tag = (CompoundTag) entry;
             UUID uuid = tag.read("uuid", UUIDUtil.CODEC).orElseThrow();
-            pointsToDistribute.put(uuid, tag.getInt("points").orElseThrow() );
+            pointsToDistribute.put(uuid, tag.getInt("points").orElseThrow());
         }
     }
 }

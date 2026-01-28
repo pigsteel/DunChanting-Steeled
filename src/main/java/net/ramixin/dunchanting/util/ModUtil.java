@@ -23,10 +23,8 @@ import net.ramixin.dunchanting.payloads.EnchantmentPointsUpdateS2CPayload;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -198,7 +196,7 @@ public interface ModUtil {
 
     static List<Holder<Enchantment>> getStoredEnchants(ItemStack stack) {
         ItemEnchantments storedEnchantments = stack.getOrDefault(DataComponents.STORED_ENCHANTMENTS, ItemEnchantments.EMPTY);
-        return new ArrayList<>(storedEnchantments.keySet().stream().sorted().toList());
+        return storedEnchantments.keySet().stream().sorted(Comparator.comparing(o -> o.value().description().getString())).toList();
     }
 
 }
