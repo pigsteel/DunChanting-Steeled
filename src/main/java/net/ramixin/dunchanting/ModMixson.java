@@ -4,9 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.resources.Identifier;
-import net.ramixin.mixson.inline.EventContext;
-import net.ramixin.mixson.inline.Mixson;
-import net.ramixin.mixson.inline.MixsonCodecs;
+import net.ramixin.mixson.EventContext;
+import net.ramixin.mixson.Mixson;
+import net.ramixin.mixson.MixsonCodecs;
 
 import java.util.Map;
 import java.util.Optional;
