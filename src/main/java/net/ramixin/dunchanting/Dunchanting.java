@@ -38,7 +38,7 @@ public class Dunchanting implements ModInitializer {
 		ModEnchantmentEffects.onInitialize();
 		ModSubPredicateTypes.onInitialize();
 		ModMixson.onInitialize();
-		PayloadTypeRegistry.playS2C().register(EnchantmentPointsUpdateS2CPayload.PACKET_ID, EnchantmentPointsUpdateS2CPayload.PACKET_CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(EnchantmentPointsUpdateS2CPayload.PACKET_ID, EnchantmentPointsUpdateS2CPayload.PACKET_CODEC);
 		ModMenus.onInitialize();
 		ModFunctionTypes.onInitialize();
 

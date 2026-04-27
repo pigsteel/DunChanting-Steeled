@@ -14,21 +14,23 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.UUID;
+
 @Mixin(PrimaryLevelData.class)
 public abstract class PrimaryLevelDataMixin {
 
     @SuppressWarnings("deprecation")
     @Inject(method = "parse", at = @At("TAIL"))
-    private static <T> void loadAttributionData(Dynamic<T> dynamic, LevelSettings info, PrimaryLevelData.SpecialWorldProperty specialProperty, WorldOptions generatorOptions, Lifecycle lifecycle, CallbackInfoReturnable<PrimaryLevelData> cir) {
-        CompoundTag root = dynamic.get("DungeonEnchants").flatMap(CompoundTag.CODEC::parse).result().orElse(new CompoundTag());
+    private static <T> void loadAttributionData(Dynamic<T> input, LevelSettings settings, PrimaryLevelData.SpecialWorldProperty specialWorldProperty, Lifecycle worldGenSettingsLifecycle, CallbackInfoReturnable<PrimaryLevelData> cir) {
+        CompoundTag root = input.get("DungeonEnchants").flatMap(CompoundTag.CODEC::parse).result().orElse(new CompoundTag());
         AttributionManager.load(root);
     }
 
     @Inject(method = "setTagData", at = @At("TAIL"))
-    private void saveAttributionData(RegistryAccess registryManager, CompoundTag levelNbt, CompoundTag playerNbt, CallbackInfo ci) {
+    private void saveAttributionData(CompoundTag tag, UUID singlePlayerUUID, CallbackInfo ci) {
         CompoundTag root = new CompoundTag();
         AttributionManager.save(root);
-        levelNbt.put("DungeonEnchants", root);
+        tag.put("DungeonEnchants", root);
     }
 
 }

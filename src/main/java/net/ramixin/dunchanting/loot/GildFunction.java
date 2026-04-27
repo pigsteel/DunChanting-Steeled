@@ -10,7 +10,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.ramixin.dunchanting.items.components.Gilded;
 import net.ramixin.dunchanting.items.components.ModDataComponents;
@@ -20,7 +19,7 @@ public class GildFunction implements LootItemFunction {
 
     public static final MapCodec<GildFunction> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                            ConstantValue.CODEC.fieldOf("chance").forGetter(GildFunction::getChance)
+                            ConstantValue.MAP_CODEC.fieldOf("chance").forGetter(GildFunction::getChance)
             ).apply(instance, GildFunction::new)
     );
 
@@ -31,7 +30,7 @@ public class GildFunction implements LootItemFunction {
     }
 
     @Override
-    public @NonNull LootItemFunctionType<? extends LootItemFunction> getType() {
+    public @NonNull MapCodec<? extends LootItemFunction> codec() {
         return ModFunctionTypes.GILD;
     }
 
